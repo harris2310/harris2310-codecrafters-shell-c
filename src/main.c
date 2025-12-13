@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
   printf("$ ");
   char command[256];
   fgets(command, sizeof(command), stdin);
-  printf("%s: command not found\n", (command));
+  command[strcspn(command, "\n")] = '\0';
+  printf("%s: command not found\n", command);
   return 0;
 }
