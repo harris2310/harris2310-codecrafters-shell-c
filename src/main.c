@@ -10,13 +10,25 @@ int main(int argc, char *argv[])
     setbuf(stdout, NULL);
     // TODO: Uncomment the code below to pass the first stage
     printf("$ ");
-    char command[256];
-    fgets(command, sizeof(command), stdin);
-    command[strcspn(command, "\n")] = '\0';
-    if (strcmp(command, "exit") == 0)
+    char input[256];
+    fgets(input, sizeof(input), stdin);
+    if (strcmp(input, "exit") == 0)
     {
-      return 0;
+      exit(0);
     }
-    printf("%s: command not found\n", command);
+    // echo command
+    if (strncmp(input, "echo", 4) == 0)
+    {
+      if (strlen(input) > 5)
+      {
+        printf("%s\n", input + 5);
+      }
+      else
+      {
+        printf("\n");
+      }
+      continue;
+    }
+    printf("%s: command not found\n", input);
   }
 }
