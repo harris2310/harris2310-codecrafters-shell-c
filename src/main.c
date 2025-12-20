@@ -3,6 +3,10 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define BUILTIN_COUNT 3
+
+const char *builtins[] = {"echo", "type", "exit"};
+
 bool echo(char *input)
 {
   if (!strncmp(input, "echo", 4) == 0)
@@ -10,6 +14,26 @@ bool echo(char *input)
   if (!strlen(input) > 5)
     return 0;
   printf("%s\n", input + 5);
+  return 1;
+}
+
+bool type(char *input)
+{
+  if (!strncmp(input, "type", 4) == 0)
+    return 0;
+  if (!strlen(input) > 5)
+    return 0;
+  // we know it's a type command
+  char *command = strchr(input, ' ');
+  for (int i = 0; i < BUILTIN_COUNT; i++)
+  {
+    if (strcmp(command + 1, builtins[i]) == 0)
+    {
+      printf("%s is a shell builtin\n", command + 1);
+      return 1; // match found
+    }
+  }
+  printf("%s: not found\n", command + 1);
   return 1;
 }
 
@@ -30,6 +54,9 @@ int main(int argc, char *argv[])
     }
     bool isEcho = echo(input);
     if (isEcho)
+      continue;
+    bool isType = type(input);
+    if (isType)
       continue;
     printf("%s: command not found\n", input);
   }
