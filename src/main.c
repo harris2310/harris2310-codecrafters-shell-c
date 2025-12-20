@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+
+bool echo(char *input)
+{
+  if (!strncmp(input, "echo", 4) == 0)
+    return 0;
+  if (!strlen(input) > 5)
+    return 0;
+  printf("%s\n", input + 5);
+  return 1;
+}
 
 int main(int argc, char *argv[])
 {
@@ -17,14 +28,9 @@ int main(int argc, char *argv[])
     {
       exit(0);
     }
-    if (strncmp(input, "echo", 4) == 0)
-    {
-      if (strlen(input) > 5)
-      {
-        printf("%s\n", input + 5);
-      }
+    bool isEcho = echo(input);
+    if (isEcho)
       continue;
-    }
     printf("%s: command not found\n", input);
   }
 }
