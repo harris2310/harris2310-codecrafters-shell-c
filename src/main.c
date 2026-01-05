@@ -5,6 +5,12 @@
 
 #define BUILTIN_COUNT 3
 
+#ifdef _WIN32
+#define PATH_SEPARATOR ';'
+#else
+#define PATH_SEPARATOR ':'
+#endif
+
 const char *builtins[] = {"echo", "type", "exit"};
 
 bool echo(char *input)
@@ -33,6 +39,10 @@ bool type(char *input)
       return 1; // match found
     }
   }
+  const char *s = getenv("PATH");
+  printf("%s", s);
+  char *directories = strsep(s, PATH_SEPARATOR);
+  printf("%s", directories);
   printf("%s: not found\n", command + 1);
   return 1;
 }
