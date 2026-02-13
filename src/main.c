@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #define BUILTIN_COUNT 3
 
@@ -44,11 +45,17 @@ bool type(char *input)
   int i = 0;
   while ((paths[i] = strsep(&s, PATH_SEPARATOR)) != NULL)
   {
-    printf("%s\n", paths[i]);
+    char *pathWithTrailingSlash = strcat(paths[i], "/");
+    char *exePath = strcat(pathWithTrailingSlash, command + 1);
+    printf("%s\n", exePath);
+    if (access(paths[i], X_OK) == 0)
+    {
+      printf("YES");
+      return 1;
+    }
     i++;
   }
-  printf("%s: not found\n", command + 1);
-  return 1;
+  return 0;
 }
 
 int main(int argc, char *argv[])
