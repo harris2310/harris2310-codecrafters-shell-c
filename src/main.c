@@ -60,7 +60,7 @@ bool type(char *input)
   int i = 0;
   while ((paths[i] = strsep(&s, PATH_SEPARATOR)) != NULL)
   {
-    char exePath[1024];
+    char exePath[2048];
     snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command_copy);
     if (access(exePath, X_OK) == 0)
     {
