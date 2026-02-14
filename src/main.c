@@ -46,8 +46,7 @@ bool type(char *input)
     return 0;
   // we know it's a type command
   char *command = strchr(input, ' ');
-  trim(command);
-  printf("%s", command);
+  trim(command); // trims the command
   for (int i = 0; i < BUILTIN_COUNT; i++)
   {
     if (strcmp(command + 1, builtins[i]) == 0)
