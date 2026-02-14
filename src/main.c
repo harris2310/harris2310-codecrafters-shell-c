@@ -45,13 +45,13 @@ bool type(char *input)
   if (!strlen(input) > 5)
     return 0;
   // we know it's a type command
-  char *command = strchr(input, ' ');
-  trim(command); // trims the command
+  char *command_copy = strdup(strchr(input, ' '));
+  trim(command_copy); // trims the command
   for (int i = 0; i < BUILTIN_COUNT; i++)
   {
-    if (strcmp(command + 1, builtins[i]) == 0)
+    if (strcmp(command_copy, builtins[i]) == 0)
     {
-      printf("%s is a shell builtin\n", command + 1);
+      printf("%s is a shell builtin\n", command_copy + 1);
       return 1; // match found
     }
   }
@@ -61,10 +61,10 @@ bool type(char *input)
   while ((paths[i] = strsep(&s, PATH_SEPARATOR)) != NULL)
   {
     char exePath[1024];
-    snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command + 1);
+    snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command_copy);
     if (access(exePath, X_OK) == 0)
     {
-      printf("%s is %s\n", command + 1, exePath);
+      printf("%s is %s\n", command_copy, exePath);
       return 1;
     }
     i++;
