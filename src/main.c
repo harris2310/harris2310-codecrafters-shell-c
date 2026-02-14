@@ -61,16 +61,12 @@ bool type(char *input)
   int i = 0;
   while ((paths[i] = strsep(&s, PATH_SEPARATOR)) != NULL)
   {
-    struct stat st;
     char exePath[2048];
     snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command_copy);
-    if (stat(exePath, &st) == 0)
+    if (access(exePath, X_OK) == 0)
     {
-      if (st.st_mode & S_IXOTH)
-      {
-        printf("%s is %s\n", command_copy, exePath);
-        return 1;
-      }
+      printf("%s is %s\n", command_copy, exePath);
+      return 1;
     }
     i++;
   }
