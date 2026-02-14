@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <ctype.h>
 
 #define BUILTIN_COUNT 3
 
@@ -24,6 +25,19 @@ bool echo(char *input)
   return 1;
 }
 
+void trim(char *s)
+{
+  char *p = s;
+  int l = strlen(p);
+
+  while (isspace(p[l - 1]))
+    p[--l] = 0;
+  while (*p && isspace(*p))
+    ++p, --l;
+
+  memmove(s, p, l + 1);
+}
+
 bool type(char *input)
 {
   if (!strncmp(input, "type", 4) == 0)
@@ -32,6 +46,8 @@ bool type(char *input)
     return 0;
   // we know it's a type command
   char *command = strchr(input, ' ');
+  trim(command);
+  printf("%s", command);
   for (int i = 0; i < BUILTIN_COUNT; i++)
   {
     if (strcmp(command + 1, builtins[i]) == 0)
@@ -47,7 +63,7 @@ bool type(char *input)
   {
     char exePath[1024];
     snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command + 1);
-    if (access(exePath, F_OK) == 0)
+    if (access(exePath, X_OK) == 0)
     {
       printf("%s is %s\n", command + 1, exePath);
       return 1;
