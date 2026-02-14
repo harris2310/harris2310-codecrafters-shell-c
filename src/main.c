@@ -49,7 +49,7 @@ bool type(char *input)
     snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command + 1);
     if (access(exePath, X_OK) == 0)
     {
-      printf("%s is %s", command, exePath);
+      printf("%s is %s\n", command + 1, exePath);
       return 1;
     }
     i++;
