@@ -45,12 +45,11 @@ bool type(char *input)
   int i = 0;
   while ((paths[i] = strsep(&s, PATH_SEPARATOR)) != NULL)
   {
-    char *pathWithTrailingSlash = strcat(paths[i], "/");
-    char *exePath = strcat(pathWithTrailingSlash, command + 1);
-    printf("%s\n", exePath);
-    if (access(paths[i], X_OK) == 0)
+    char exePath[1024];
+    snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command + 1);
+    if (access(exePath, X_OK) == 0)
     {
-      printf("YES");
+      printf("%s is %s", command, exePath);
       return 1;
     }
     i++;
