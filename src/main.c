@@ -47,7 +47,7 @@ bool type(char *input)
   {
     char exePath[1024];
     snprintf(exePath, sizeof(exePath), "%s/%s", paths[i], command + 1);
-    if (access(exePath, X_OK) == 0)
+    if (access(exePath, F_OK) == 0)
     {
       printf("%s is %s\n", command + 1, exePath);
       return 1;
