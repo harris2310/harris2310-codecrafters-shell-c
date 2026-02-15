@@ -70,7 +70,8 @@ bool type(char *input)
     }
     i++;
   }
-  return 0;
+  printf("%s: command not found\n", command_copy);
+  return 1;
 }
 
 int main(int argc, char *argv[])
