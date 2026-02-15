@@ -56,7 +56,7 @@ bool type(char *input)
       return 1; // match found
     }
   }
-  char *s = getenv("PATH");
+  char *s = strdup(getenv("PATH"));
   char *paths[20];
   int i = 0;
   while ((paths[i] = strsep(&s, PATH_SEPARATOR)) != NULL)
