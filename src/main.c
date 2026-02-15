@@ -70,7 +70,7 @@ bool type(char *input)
     }
     i++;
   }
-  printf("%s: command not found\n", command_copy);
+  printf("%s: not found\n", command_copy);
   return 1;
 }
 
