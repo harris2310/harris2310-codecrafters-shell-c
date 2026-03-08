@@ -91,7 +91,8 @@ bool command(char *input)
   char *command_copy;
   if (command != NULL)
   {
-    command_copy = strdup(command);
+    size_t len = command - input; // length before space
+    command_copy = strndup(input, len);
   }
   else
   {
