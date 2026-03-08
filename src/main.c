@@ -101,7 +101,7 @@ bool command(char *input)
 
   if (exePath)
   {
-    system(command_copy);
+    system(input);
     return 1;
   }
   return 0;
