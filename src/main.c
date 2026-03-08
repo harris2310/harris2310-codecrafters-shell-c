@@ -137,11 +137,11 @@ int main()
     bool isEcho = echo(input);
     if (isEcho)
       continue;
-    bool isPwd = pwd(input);
-    if (isPwd)
-      continue;
     bool isType = type(input);
     if (isType)
+      continue;
+    bool isPwd = pwd(input);
+    if (isPwd)
       continue;
     bool isCommand = command(input);
     if (isCommand)
