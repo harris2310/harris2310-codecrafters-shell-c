@@ -97,12 +97,11 @@ bool command(char *input)
   {
     command_copy = strdup(input);
   }
+  printf("%s", command_copy);
   char *exePath = findExecutable(command_copy);
-  printf("%s", exePath);
 
   if (exePath)
   {
-    printf("found command");
     system(command_copy);
     return 1;
   }
