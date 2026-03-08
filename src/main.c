@@ -14,7 +14,7 @@
 #define PATH_SEPARATOR ":"
 #endif
 
-const char *builtins[] = {"echo", "type", "exit"};
+const char *builtins[] = {"echo", "pwd", "type", "exit"};
 
 char *findExecutable(char *command)
 {
