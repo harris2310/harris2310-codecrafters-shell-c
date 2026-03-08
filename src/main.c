@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 
 #define BUILTIN_COUNT 3
-#define PATH_MAX 1024
+#define PATH_MAX 4096
 #ifdef _WIN32
 #define PATH_SEPARATOR ";"
 #else
