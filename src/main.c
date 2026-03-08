@@ -84,6 +84,18 @@ bool type(char *input)
   return 1;
 }
 
+bool command(char *input)
+{
+  char *command_copy = strdup(strchr(input, ' '));
+  char *exePath = findExecutable(command_copy);
+  if (exePath)
+  {
+    system(command_copy);
+    return 1;
+  }
+  return 0;
+}
+
 int main()
 {
   while (1)
@@ -104,6 +116,9 @@ int main()
       continue;
     bool isType = type(input);
     if (isType)
+      continue;
+    bool isCommand = command(input);
+    if (isCommand)
       continue;
     printf("%s: command not found\n", input);
   }
