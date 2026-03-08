@@ -71,7 +71,7 @@ bool type(char *input)
     if (strcmp(command_copy, builtins[i]) == 0)
     {
       printf("%s is a shell builtin\n", command_copy);
-      return 1; // match found
+      return 1; // match fou4d
     }
   }
   char *exePath = findExecutable(command_copy);
@@ -110,7 +110,7 @@ bool command(char *input)
 bool pwd(char *input)
 {
   trim(input);
-  if (strcmp(input, "pwd"))
+  if (strstr(input, "pwd"))
   {
     char buf[PATH_MAX];
     getcwd(buf, 1024);
