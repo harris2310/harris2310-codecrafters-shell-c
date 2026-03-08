@@ -109,6 +109,7 @@ bool command(char *input)
 
 bool pwd(char *input)
 {
+  trim(input);
   if (strcmp(input, "pwd"))
   {
     char buf[PATH_MAX];
