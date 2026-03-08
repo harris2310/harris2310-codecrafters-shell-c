@@ -110,11 +110,11 @@ bool command(char *input)
 bool pwd(char *input)
 {
   trim(input);
-  if (strcmp(input, "pwd"))
+  if (strstr(input, "pwd"))
   {
     char buf[PATH_MAX];
     getcwd(buf, 1024);
-    printf("%s", buf);
+    printf("%s\n", buf);
     return 1;
   }
   return 0;
