@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 
 #define BUILTIN_COUNT 3
-
+#define PATH_MAX 1024
 #ifdef _WIN32
 #define PATH_SEPARATOR ";"
 #else
@@ -107,6 +107,18 @@ bool command(char *input)
   return 0;
 }
 
+bool pwd(char *input)
+{
+  if (strcmp(input, "pwd"))
+  {
+    char buf[PATH_MAX];
+    getcwd(buf, 1024);
+    printf("%s", buf);
+    return 1;
+  }
+  return 0;
+}
+
 int main()
 {
   while (1)
@@ -124,6 +136,9 @@ int main()
     }
     bool isEcho = echo(input);
     if (isEcho)
+      continue;
+    bool isPwd = pwd(input);
+    if (isPwd)
       continue;
     bool isType = type(input);
     if (isType)
