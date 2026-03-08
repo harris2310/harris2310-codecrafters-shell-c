@@ -86,7 +86,6 @@ bool type(char *input)
 
 bool command(char *input)
 {
-  printf("%s", input);
   char *command = strchr(input, ' ');
   char *command_copy;
   if (command != NULL)
@@ -98,7 +97,6 @@ bool command(char *input)
   {
     command_copy = strdup(input);
   }
-  printf("%s", command_copy);
   char *exePath = findExecutable(command_copy);
 
   if (exePath)
