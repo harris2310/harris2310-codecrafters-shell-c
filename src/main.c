@@ -86,10 +86,23 @@ bool type(char *input)
 
 bool command(char *input)
 {
-  char *command_copy = strdup(strchr(input, ' '));
+  printf("%s", input);
+  char *command = strchr(input, ' ');
+  char *command_copy;
+  if (command != NULL)
+  {
+    command_copy = strdup(command);
+  }
+  else
+  {
+    command_copy = strdup(input);
+  }
   char *exePath = findExecutable(command_copy);
+  printf("%s", exePath);
+
   if (exePath)
   {
+    printf("found command");
     system(command_copy);
     return 1;
   }
