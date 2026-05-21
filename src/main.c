@@ -130,7 +130,7 @@ Check if command is pwd and executes it
 bool pwd(char *input)
 {
   trim(input);
-  if (strstr(input, "pwd"))
+  if (strcmp(input, "pwd"))
   {
     char buf[PATH_MAX];
     getcwd(buf, 1024);
