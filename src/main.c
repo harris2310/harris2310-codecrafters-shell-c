@@ -57,6 +57,20 @@ void trim(char *s)
   memmove(s, p, l + 1);
 }
 
+/*
+Checks if command is cd and executes it
+*/
+bool cd(char *input)
+{
+  if (!strncmp(input, "cd", 2) == 0)
+  {
+    return 0;
+  }
+}
+
+/*
+Checks if command is type and executes it
+*/
 bool type(char *input)
 {
   if (!strncmp(input, "type", 4) == 0)
@@ -84,6 +98,9 @@ bool type(char *input)
   return 1;
 }
 
+/*
+Checks if command is command and executes it
+ */
 bool command(char *input)
 {
   char *command = strchr(input, ' ');
@@ -107,6 +124,9 @@ bool command(char *input)
   return 0;
 }
 
+/*
+Check if command is pwd and executes it
+*/
 bool pwd(char *input)
 {
   trim(input);
@@ -146,6 +166,9 @@ int main()
       continue;
     bool isCommand = command(input);
     if (isCommand)
+      continue;
+    bool isChdir = chdir(input);
+    if (isChdir)
       continue;
     printf("%s: command not found\n", input);
   }
