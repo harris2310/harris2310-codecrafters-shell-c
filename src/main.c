@@ -75,6 +75,11 @@ bool chdirCmd(char *input)
   if (chdir(pathCpy) == 0) {
     return 1;
   } else {
+    char* home_dir = getenv("HOME");
+    if (strcmp(pathCpy, "~") == 0) {
+      chdir(home_dir);
+      return 1;
+    }
     printf("cd: %s: No such file or directory\n", pathCpy);
     return 1;
   }
