@@ -109,7 +109,7 @@ bool type(char *input)
   printf("%s: not found\n", command_copy);
   return 1;
 }
-
+//
 /*
 Checks if command is command and executes it
  */
