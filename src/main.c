@@ -76,7 +76,7 @@ bool chdirCmd(char *input)
     return 1;
   } else {
     printf("cd: %s: No such file or directory\n", pathCpy);
-    return 0;
+    return 1;
   }
 }
 
