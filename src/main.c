@@ -75,7 +75,7 @@ bool chdirCmd(char *input)
   if (chdir(pathCpy) == 0) {
     return 1;
   } else {
-    printf("cd: %s: No such file or directory", pathCpy);
+    printf("cd: %s: No such file or directory\n", pathCpy);
     return 0;
   }
 }
@@ -167,6 +167,9 @@ int main()
     {
       exit(0);
     }
+    bool isChdir = chdirCmd(input);
+    if (isChdir)
+      continue;
     bool isEcho = echo(input);
     if (isEcho)
       continue;
@@ -178,9 +181,6 @@ int main()
       continue;
     bool isCommand = command(input);
     if (isCommand)
-      continue;
-    bool isChdir = chdirCmd(input);
-    if (isChdir)
       continue;
     printf("%s: command not found\n", input);
   }
