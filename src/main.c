@@ -60,11 +60,23 @@ void trim(char *s)
 /*
 Checks if command is cd and executes it
 */
-bool cd(char *input)
+bool chdirCmd(char *input)
 {
   if (!strncmp(input, "cd", 2) == 0)
   {
     return 0;
+  }
+  if (!(strlen(input) > 3))
+  {
+    return 0;
+  }
+  char* pathCpy = strdup(strchr(input, ' '));
+  trim(pathCpy);
+  if (chdir(pathCpy) == 0) {
+    return 1;
+  } else {
+    printf("cd: %s: No such file or directory\n", pathCpy);
+    return 1;
   }
 }
 
@@ -127,7 +139,7 @@ bool command(char *input)
 /*
 Check if command is pwd and executes it
 */
-bool pwd(char *input)
+bool pwdCmd(char *input)
 {
   trim(input);
   if (strcmp(input, "pwd"))
@@ -155,20 +167,20 @@ int main()
     {
       exit(0);
     }
+    bool isChdir = chdirCmd(input);
+    if (isChdir)
+      continue;
     bool isEcho = echo(input);
     if (isEcho)
       continue;
     bool isType = type(input);
     if (isType)
       continue;
-    bool isPwd = pwd(input);
+    bool isPwd = pwdCmd(input);
     if (isPwd)
       continue;
     bool isCommand = command(input);
     if (isCommand)
-      continue;
-    bool isChdir = chdir(input);
-    if (isChdir)
       continue;
     printf("%s: command not found\n", input);
   }
