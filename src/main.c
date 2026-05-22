@@ -60,7 +60,7 @@ void trim(char *s)
 /*
 Checks if command is cd and executes it
 */
-bool chdir(char *input)
+bool chdirCmd(char *input)
 {
   if (!strncmp(input, "cd", 2) == 0)
   {
@@ -70,7 +70,14 @@ bool chdir(char *input)
   {
     return 0;
   }
-
+  char* pathCpy = strdup(strchr(input, ' '));
+  trim(pathCpy);
+  if (chdir(pathCpy) == 0) {
+    return 1;
+  } else {
+    printf("cd: %s: No such file or directory", pathCpy);
+    return 0;
+  }
 }
 
 /*
@@ -172,7 +179,7 @@ int main()
     bool isCommand = command(input);
     if (isCommand)
       continue;
-    bool isChdir = chdir(input);
+    bool isChdir = chdirCmd(input);
     if (isChdir)
       continue;
     printf("%s: command not found\n", input);
