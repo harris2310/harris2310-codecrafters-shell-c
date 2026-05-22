@@ -139,10 +139,10 @@ bool command(char *input)
 /*
 Check if command is pwd and executes it
 */
-bool pwdCmd(char *input)
+bool pwd(char *input)
 {
   trim(input);
-  if (strcmp(input, "pwd"))
+  if (strstr(input, "pwd"))
   {
     char buf[PATH_MAX];
     getcwd(buf, 1024);
@@ -176,7 +176,7 @@ int main()
     bool isType = type(input);
     if (isType)
       continue;
-    bool isPwd = pwdCmd(input);
+    bool isPwd = pwd(input);
     if (isPwd)
       continue;
     bool isCommand = command(input);
